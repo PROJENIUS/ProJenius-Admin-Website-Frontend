@@ -1,0 +1,390 @@
+/* =========================================================
+
+
+   ADMIN WORKSPACE LAYOUT
+========================================================= */
+/* =========================================================
+   GLOBAL BASE STYLES
+========================================================= */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+
+.pa-admin-workspace {
+  min-height: 100vh;
+  min-height: 100dvh;
+  margin-left: 264px;
+  background: #f4f7fb;
+  color: #142b4a;
+  transition: margin-left 180ms ease;
+}
+
+.pa-admin-workspace--collapsed {
+  margin-left: 80px;
+}
+
+.pa-admin-main {
+  min-width: 0;
+  padding: 28px;
+}
+
+/* =========================================================
+   ADMIN HEADER
+========================================================= */
+
+.pa-admin-header {
+  min-height: 94px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 18px 28px;
+  border-bottom: 1px solid #e3e9f1;
+  background: #ffffff;
+}
+
+.pa-admin-header__left,
+.pa-admin-header__right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.pa-admin-header__heading h1 {
+  margin: 0;
+  color: #142b4a;
+  font-size: 22px;
+  font-weight: 750;
+  letter-spacing: -0.5px;
+}
+
+.pa-admin-header__heading p {
+  margin: 6px 0 0;
+  color: #758398;
+  font-size: 12px;
+}
+
+.pa-admin-header__menu {
+  display: none;
+  width: 40px;
+  height: 40px;
+  border: 1px solid #e0e7ef;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #142b4a;
+  font-size: 19px;
+  cursor: pointer;
+}
+
+.pa-admin-header__menu:focus-visible,
+.pa-admin-header__logout:focus-visible {
+  outline: 2px solid #315d91;
+  outline-offset: 3px;
+}
+
+/* =========================================================
+   HEADER STATUS AND PROFILE
+========================================================= */
+
+.pa-admin-header__status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #607087;
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.pa-admin-header__status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #26966b;
+}
+
+.pa-admin-header__profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-left: 16px;
+  border-left: 1px solid #e3e9f1;
+}
+
+.pa-admin-header__avatar {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #e7eef8;
+  color: #142b4a;
+  font-size: 15px;
+  font-weight: 750;
+}
+
+.pa-admin-header__profile-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.pa-admin-header__profile-name {
+  color: #263b55;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.pa-admin-header__profile-role {
+  color: #7b899b;
+  font-size: 11px;
+}
+
+.pa-admin-header__logout {
+  min-height: 36px;
+  padding: 0 12px;
+  border: 1px solid #dce4ee;
+  border-radius: 7px;
+  background: #ffffff;
+  color: #304862;
+  font-size: 12px;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.pa-admin-header__logout:hover {
+  background: #f1f5fa;
+}
+
+/* =========================================================
+   ADMIN PAGE CONTENT
+========================================================= */
+
+.pa-admin-page {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.pa-admin-page__welcome {
+  padding: 26px;
+  border: 1px solid #e2e9f2;
+  border-radius: 12px;
+  background: #ffffff;
+}
+
+.pa-admin-page__welcome h2 {
+  margin: 0;
+  font-size: 19px;
+  font-weight: 750;
+}
+
+.pa-admin-page__welcome p {
+  margin: 9px 0 0;
+  color: #718096;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.pa-admin-page__section-title {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 750;
+}
+
+.pa-admin-page__stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.pa-admin-page__stat {
+  min-width: 0;
+  padding: 22px;
+  border: 1px solid #e2e9f2;
+  border-radius: 12px;
+  background: #ffffff;
+}
+
+.pa-admin-page__stat-label {
+  color: #748298;
+  font-size: 12px;
+}
+
+.pa-admin-page__stat-value {
+  display: block;
+  margin-top: 14px;
+  color: #142b4a;
+  font-size: 28px;
+  font-weight: 750;
+}
+
+.pa-admin-page__stat-note {
+  display: block;
+  margin-top: 8px;
+  color: #8995a5;
+  font-size: 11px;
+}
+
+.pa-admin-page__panel {
+  padding: 22px;
+  border: 1px solid #e2e9f2;
+  border-radius: 12px;
+  background: #ffffff;
+}
+
+.pa-admin-page__empty {
+  margin: 16px 0 0;
+  color: #758398;
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.pa-admin-page__notice {
+  padding: 14px 16px;
+  border: 1px solid #d9e5f3;
+  border-radius: 8px;
+  background: #edf4fc;
+  color: #304862;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+/* =========================================================
+   RESPONSIVE WORKSPACE
+========================================================= */
+
+@media (max-width: 1100px) {
+  .pa-admin-page__stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .pa-admin-header {
+    padding-inline: 20px;
+  }
+
+  .pa-admin-main {
+    padding: 20px;
+  }
+
+  .pa-admin-header__status {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .pa-admin-workspace,
+  .pa-admin-workspace--collapsed {
+    margin-left: 0;
+  }
+
+  .pa-admin-header {
+    min-height: 80px;
+    padding: 14px 16px;
+  }
+
+  .pa-admin-header__menu {
+    display: block;
+    flex: 0 0 40px;
+  }
+
+  .pa-admin-header__left {
+    min-width: 0;
+    gap: 12px;
+  }
+
+  .pa-admin-header__heading h1 {
+    font-size: 18px;
+  }
+
+  .pa-admin-header__heading p {
+    max-width: 210px;
+    font-size: 11px;
+    line-height: 1.5;
+  }
+
+  .pa-admin-header__right {
+    gap: 10px;
+  }
+
+  .pa-admin-header__profile {
+    padding-left: 0;
+    border-left: 0;
+  }
+
+  .pa-admin-header__profile-copy {
+    display: none;
+  }
+
+  .pa-admin-header__logout {
+    padding-inline: 9px;
+  }
+
+  .pa-admin-main {
+    padding: 16px;
+  }
+
+  .pa-admin-page__welcome,
+  .pa-admin-page__panel {
+    padding: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .pa-admin-page__stats {
+    grid-template-columns: 1fr;
+  }
+
+  .pa-admin-header {
+    gap: 8px;
+  }
+
+  .pa-admin-header__left {
+    gap: 8px;
+  }
+
+  .pa-admin-header__heading p {
+    max-width: 155px;
+  }
+
+  .pa-admin-header__right {
+    gap: 8px;
+  }
+
+  .pa-admin-header__avatar {
+    width: 32px;
+    height: 32px;
+  }
+
+  .pa-admin-header__logout {
+    min-height: 34px;
+    font-size: 11px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pa-admin-workspace {
+    transition: none;
+  }
+}

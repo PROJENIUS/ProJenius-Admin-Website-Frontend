@@ -1,0 +1,109 @@
+/* =========================================================
+   LOGIN SCREEN LAYOUT
+========================================================= */
+
+.pa-login-screen {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: #ffffff;
+  color: #142b4a;
+}
+
+/* =========================================================
+   BRAND PANEL
+========================================================= */
+
+.pa-login-brand {
+  display: flex;
+  align-items: center;
+  padding: clamp(32px, 7vw, 100px);
+  background: #142b4a;
+  color: #ffffff;
+}
+
+.pa-login-brand__content {
+  width: 100%;
+  max-width: 520px;
+  margin-inline: auto;
+}
+
+.pa-login-brand__logo {
+  width: 58px;
+  height: 58px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 44px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 15px;
+  font-size: 30px;
+  font-weight: 800;
+}
+
+.pa-login-brand__eyebrow {
+  margin: 0 0 22px;
+  color: #b9c9dd;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  line-height: 1.8;
+}
+
+.pa-login-brand__title {
+  margin: 0;
+  font-size: clamp(42px, 5vw, 68px);
+  font-weight: 750;
+  letter-spacing: -2px;
+  line-height: 1.08;
+}
+
+.pa-login-brand__description {
+  max-width: 410px;
+  margin: 26px 0 0;
+  color: #d1dceb;
+  font-size: 15px;
+  line-height: 1.9;
+}
+
+.pa-login-brand__footer {
+  margin-top: 100px;
+  color: #b9c9dd;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.8px;
+}
+
+/* =========================================================
+   RESPONSIVE BRAND PANEL
+========================================================= */
+
+@media (max-width: 768px) {
+  .pa-login-screen {
+    grid-template-columns: 1fr;
+  }
+
+  .pa-login-brand {
+    padding: 32px 24px;
+  }
+
+  .pa-login-brand__logo {
+    width: 46px;
+    height: 46px;
+    margin-bottom: 22px;
+    font-size: 24px;
+  }
+
+  .pa-login-brand__title {
+    font-size: clamp(36px, 9vw, 48px);
+  }
+
+  .pa-login-brand__description {
+    margin-top: 16px;
+    font-size: 14px;
+  }
+
+  .pa-login-brand__footer {
+    margin-top: 30px;
+  }
+}

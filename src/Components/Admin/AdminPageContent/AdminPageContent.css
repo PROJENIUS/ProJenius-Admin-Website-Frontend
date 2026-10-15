@@ -1,0 +1,62 @@
+
+.pa-admin-content {
+  display: grid;
+  gap: 24px;
+  width: 100%;
+}
+
+.pa-admin-content__heading,
+.pa-admin-content__panel {
+  padding: clamp(20px, 4vw, 32px);
+  border: 1px solid var(--pa-border, #e5e7eb);
+  border-radius: 18px;
+  background: var(--pa-surface, #fff);
+}
+
+.pa-admin-content__eyebrow {
+  color: var(--pa-accent, #635bdb);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.pa-admin-content__heading h1 {
+  margin: 12px 0 8px;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+}
+
+.pa-admin-content__heading p,
+.pa-admin-content__panel p {
+  margin: 0;
+  color: var(--pa-muted, #6b7280);
+  line-height: 1.7;
+}
+
+.pa-admin-content__panel {
+  display: grid;
+  justify-items: start;
+  gap: 14px;
+}
+
+.pa-admin-content__panel h2 {
+  margin: 0;
+  font-size: 1.15rem;
+}
+
+.pa-admin-content__icon {
+  display: grid;
+  width: 48px;
+  height: 48px;
+  place-items: center;
+  border-radius: 14px;
+  background: var(--pa-subtle, #f3f4f6);
+  font-size: 1.5rem;
+}
+
+.pa-admin-content__route {
+  padding: 7px 10px;
+  border-radius: 8px;
+  background: var(--pa-subtle, #f3f4f6);
+  color: var(--pa-muted, #6b7280);
+  font-size: 0.8rem;
+}

@@ -1,0 +1,32 @@
+import { getAdminCsrfToken } from "./adminAuth";
+import { adminApiUrl, normalizeAdminApiBase } from "../utils/apiUrl.js";
+const configured = import.meta.env.VITE_ADMIN_API_URL?.trim();
+const API = normalizeAdminApiBase(configured, import.meta.env.DEV);
+async function request(path, { method = "GET", body, csrf = false, idempotencyKey } = {}) {
+  if (!API) throw new Error("The admin API is not configured.");
+  const headers = { Accept: "application/json" };
+  if (body && !(body instanceof FormData)) headers["Content-Type"] = "application/json";
+  if (csrf) headers["X-CSRF-Token"] = await getAdminCsrfToken();
+  if (idempotencyKey) headers["Idempotency-Key"] = idempotencyKey;
+  const response = await fetch(adminApiUrl(`/api${path}`, API), { method, credentials: "include", cache: "no-store", headers, ...(body ? { body: body instanceof FormData ? body : JSON.stringify(body) } : {}) });
+  const data = await (response.headers.get("content-type")?.includes("json") ? response.json() : response.blob());
+  if (!response.ok) throw new Error(data?.error || "The publishing request could not be completed.");
+  return data;
+}
+const queryString = (values = {}) => { const query = new URLSearchParams(); for (const [key, value] of Object.entries(values)) if (value !== "" && value !== undefined && value !== null) query.set(key, String(value)); return query.toString() ? `?${query}` : ""; };
+export const listArticles = (filters = {}) => request(`/admin/articles${queryString({ limit: 20, ...filters })}`);
+export const getArticle = (id) => request(`/admin/articles/${encodeURIComponent(id)}`);
+export const saveArticle = (item) => request("/admin/articles", { method: "POST", body: item, csrf: true });
+export const updateArticle = (id, item) => request(`/admin/articles/${encodeURIComponent(id)}`, { method: "PATCH", body: item, csrf: true });
+export const publishArticle = (id) => request(`/admin/articles/${encodeURIComponent(id)}/publish`, { method: "POST", body: {}, csrf: true });
+export const changeArticleState = (id, action, scheduledAt, timezone) => request(`/admin/articles/${encodeURIComponent(id)}/state`, { method: "PATCH", body: { action, scheduledAt, timezone }, csrf: true });
+const pendingManualKeys = new Map();
+export const articleAnnouncement = async (id) => { if (!window.confirm("Send this article to confirmed newsletter subscribers? This creates a new campaign.")) throw new Error("Campaign was not sent."); const key = pendingManualKeys.get(id) || crypto.randomUUID(); pendingManualKeys.set(id, key); const result = await request(`/admin/articles/${encodeURIComponent(id)}/announce`, { method: "POST", body: { confirm: true }, csrf: true, idempotencyKey: key }); pendingManualKeys.delete(id); return result; };
+export const uploadPublishingImage = (form) => request("/admin/articles/image", { method: "POST", body: form, csrf: true });
+export const getNewsletterStats = () => request("/admin/newsletter/stats");
+export const listNewsletterSubscribers = (filters = {}) => request(`/admin/newsletter/subscribers${queryString({ limit: 20, ...filters })}`);
+export const removeNewsletterSubscriber = (id) => request(`/admin/newsletter/subscribers/${encodeURIComponent(id)}`, { method: "DELETE", csrf: true });
+export const listNewsletterCampaigns = (filters = {}) => request(`/admin/newsletter/campaigns${queryString({ limit: 20, ...filters })}`);
+export const listNewsletterDeliveries = (id, filters = {}) => request(`/admin/newsletter/campaigns/${encodeURIComponent(id)}/deliveries${queryString({ limit: 20, ...filters })}`);
+export const retryNewsletterCampaign = (id) => request(`/admin/newsletter/campaigns/${encodeURIComponent(id)}/retry`, { method: "POST", body: {}, csrf: true });
+export const cancelNewsletterCampaign = (id) => request(`/admin/newsletter/campaigns/${encodeURIComponent(id)}/cancel`, { method: "POST", body: {}, csrf: true });

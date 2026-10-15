@@ -1,0 +1,23 @@
+:root {
+  --pa-navy: #142b4a;
+  --pa-navy-deep: #10243e;
+  --pa-indigo: #3754a5;
+  --pa-teal: #147f83;
+  --pa-accent: #376f92;
+  --pa-border: #dce5ef;
+  --pa-surface: #ffffff;
+  --pa-subtle: #f3f6fa;
+  --pa-muted: #65778d;
+  --pa-text: #1d3148;
+  --pa-focus: #42aaa8;
+}
+
+body { background: #f4f7fb; color: var(--pa-text); }
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid var(--pa-focus);
+  outline-offset: 2px;
+}

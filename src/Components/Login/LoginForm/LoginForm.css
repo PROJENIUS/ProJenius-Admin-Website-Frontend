@@ -1,0 +1,222 @@
+/* =========================================================
+   LOGIN FORM PANEL
+========================================================= */
+
+.pa-login-form-panel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(28px, 6vw, 76px);
+  background: #ffffff;
+}
+
+.pa-login-form__container {
+  width: 100%;
+  max-width: 420px;
+}
+
+.pa-login-form__eyebrow {
+  margin: 0 0 12px;
+  color: #526b8a;
+  font-size: 11px;
+  font-weight: 750;
+  letter-spacing: 1.8px;
+}
+
+.pa-login-form__title {
+  margin: 0;
+  color: #142b4a;
+  font-size: clamp(30px, 4vw, 38px);
+  font-weight: 750;
+  letter-spacing: -1px;
+}
+
+.pa-login-form__subtitle {
+  margin: 12px 0 34px;
+  color: #68778b;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* =========================================================
+   INPUT FIELDS
+========================================================= */
+
+.pa-login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.pa-login-form__field {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.pa-login-form__field label {
+  color: #263b55;
+  font-size: 13px;
+  font-weight: 650;
+}
+
+.pa-login-form__field input {
+  width: 100%;
+  min-width: 0;
+  height: 49px;
+  padding: 0 14px;
+  border: 1px solid #d7dfE9;
+  border-radius: 8px;
+  outline: none;
+  background: #ffffff;
+  color: #142b4a;
+  font: inherit;
+  font-size: 14px;
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.pa-login-form__field input::placeholder {
+  color: #9aa6b6;
+}
+
+.pa-login-form__field input:focus {
+  border-color: #315d91;
+  box-shadow: 0 0 0 3px rgba(49, 93, 145, 0.12);
+}
+
+.pa-login-form__password-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.pa-login-form__password-wrap input {
+  padding-right: 66px;
+}
+
+.pa-login-form__password-toggle {
+  position: absolute;
+  right: 12px;
+  border: 0;
+  background: transparent;
+  color: #315d91;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* =========================================================
+   FORM OPTIONS
+========================================================= */
+
+.pa-login-form__options {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: -2px;
+}
+
+.pa-login-form__remember {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #526176;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.pa-login-form__remember input {
+  width: 15px;
+  height: 15px;
+  accent-color: #142b4a;
+}
+
+.pa-login-form__secure-label {
+  color: #68778b;
+  font-size: 11px;
+}
+
+/* =========================================================
+   SUBMIT AND FEEDBACK
+========================================================= */
+
+.pa-login-form__submit {
+  width: 100%;
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 18px;
+  border: 0;
+  border-radius: 8px;
+  background: #142b4a;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 160ms ease, transform 160ms ease;
+}
+
+.pa-login-form__submit:hover {
+  background: #1d3d64;
+}
+
+.pa-login-form__submit:active {
+  transform: translateY(1px);
+}
+
+.pa-login-form__submit:focus-visible,
+.pa-login-form__password-toggle:focus-visible {
+  outline: 3px solid #8aaed9;
+  outline-offset: 3px;
+}
+
+.pa-login-form__error {
+  margin: -8px 0 0;
+  color: #b42318;
+  font-size: 13px;
+}
+
+.pa-login-form__note {
+  margin: 30px 0 0;
+  color: #8a96a7;
+  font-size: 12px;
+  text-align: center;
+}
+
+/* =========================================================
+   RESPONSIVE LOGIN FORM
+========================================================= */
+
+@media (max-width: 768px) {
+  .pa-login-form-panel {
+    padding: 38px 24px 48px;
+    align-items: flex-start;
+  }
+
+  .pa-login-form__subtitle {
+    margin-bottom: 26px;
+  }
+  /* =========================================
+   SECTION: LOGIN FORM DISABLED STATE
+   Classes: pa-login-form__submit
+========================================= */
+
+.pa-login-form__submit:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.pa-login-form__submit:disabled:hover {
+  background: #142b4a;
+}
+
+.pa-login-form__field input:disabled {
+  cursor: wait;
+}
+
+
+}
+.pa-login-form__forgot { display: inline-block; margin-top: 15px; color: #0a347f; font-size: 13px; font-weight: 650; }
