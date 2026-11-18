@@ -58,8 +58,6 @@ export const PERMISSION_MODULES = Object.freeze([
       { label: "Archive courses", permission: "courses:archive" },
       { label: "View enrolments", permission: "courses:enrollments:view" },
       { label: "View registration details", permission: "courses:enrollments:details" },
-      { label: "Approve paid registrations", permission: "courses:enrollments:approve" },
-      { label: "Reject paid registrations", permission: "courses:enrollments:reject" },
       { label: "Retry decision notifications", permission: "courses:notifications:retry" },
       { label: "View notification queue", permission: "courses:notifications:view" },
       { label: "View payment records", permission: "courses:payments:view" },
@@ -77,7 +75,7 @@ export const PERMISSION_MODULES = Object.freeze([
     { label: "List articles", permission: "publishing:articles:list" }, { label: "View article details and previews", permission: "publishing:articles:view" }, { label: "Create articles", permission: "publishing:articles:create" }, { label: "Edit articles", permission: "publishing:articles:edit" }, { label: "Publish and schedule", permission: "publishing:articles:publish" }, { label: "Upload images", permission: "publishing:articles:uploadImage" }, { label: "Create announcement campaigns", permission: "publishing:campaigns:create" },
   ] },
   { label: "Newsletter", status: "available", actions: [
-    { label: "View subscribers", permission: "newsletter:subscribers:view" }, { label: "View campaigns and deliveries", permission: "newsletter:campaigns:view" }, { label: "Retry failed campaigns", permission: "newsletter:campaigns:retry" }, { label: "Cancel queued campaigns", permission: "newsletter:campaigns:cancel" },
+    { label: "View subscribers", permission: "newsletter:subscribers:view" }, { label: "Retry failed welcome emails", permission: "newsletter:subscribers:retry" }, { label: "View campaigns and deliveries", permission: "newsletter:campaigns:view" }, { label: "Retry failed campaigns", permission: "newsletter:campaigns:retry" }, { label: "Cancel queued campaigns", permission: "newsletter:campaigns:cancel" },
   ] },
   {
     label: "Media Library",

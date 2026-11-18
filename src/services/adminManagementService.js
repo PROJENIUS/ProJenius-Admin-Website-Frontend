@@ -1,7 +1,7 @@
 import { getAdminCsrfToken } from "./adminAuth";
 
 const configuredApiBaseUrl = import.meta.env.VITE_ADMIN_API_URL?.trim();
-const API_BASE_URL = (configuredApiBaseUrl || (import.meta.env.DEV ? "http://localhost:5000" : ""))
+const API_BASE_URL = (configuredApiBaseUrl || (import.meta.env.DEV ? "http://localhost:5000" : "https://projenius-official-website-backend.onrender.com"))
   .replace(/\/+$/, "");
 const BASE = API_BASE_URL ? `${API_BASE_URL}/api/admin/admins` : "";
 
@@ -40,3 +40,6 @@ export const updateAdminPermissions = (id, permissions) => request(`/${encodeURI
 export const setAdminActive = (id, isActive) => request(`/${encodeURIComponent(id)}/status`, { method: "PATCH", body: JSON.stringify({ isActive }) });
 export const sendAdminPasswordReset = (id) => request(`/${encodeURIComponent(id)}/password-reset`, { method: "POST" });
 export const removeAdmin = (id) => request(`/${encodeURIComponent(id)}`, { method: "DELETE" });
+export const createAdministrator = (payload) => request("/", { method: "POST", body: JSON.stringify(payload) });
+export const setAdminPassword = (id, password) => request(`/${encodeURIComponent(id)}/password`, { method: "PATCH", body: JSON.stringify({ password }) });
+export const setAdminRole = (id, role) => request(`/${encodeURIComponent(id)}/role`, { method: "PATCH", body: JSON.stringify({ role }) });

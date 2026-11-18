@@ -6,10 +6,10 @@ export default function LoginBrand() {
   return (
     <section className="pa-login-brand">
       <div className="pa-login-brand__content">
-        <div className="pa-login-brand__logo">P</div>
+        <img className="pa-login-brand__logo" src="/ProJenius_Logo.svg" alt="ProJenius Innovation Technology logo" />
 
         <p className="pa-login-brand__eyebrow">
-          PROJENIUS INNOVATION TECHNOLOGY
+          ProJenius Innovation Technology
         </p>
 
         <h1 className="pa-login-brand__title">
@@ -24,7 +24,8 @@ export default function LoginBrand() {
         </p>
 
         <div className="pa-login-brand__footer">
-          ADMINISTRATIVE WORKSPACE
+          <span>ProJenius Admin</span>
+          <small>ProJenius Innovation Technology Private Limited</small>
         </div>
       </div>
     </section>

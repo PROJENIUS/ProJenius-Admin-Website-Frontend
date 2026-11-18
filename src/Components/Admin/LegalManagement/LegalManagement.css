@@ -1,0 +1,228 @@
+/* Admin legal document editor. */
+.pa-legal-editor {
+  display: grid;
+  gap: 16px;
+}
+
+.pa-legal-editor__toolbar {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.pa-legal-editor__toolbar h2 {
+  margin: 0;
+  color: var(--pa-navy);
+  font-size: 22px;
+}
+
+.pa-legal-editor__toolbar p {
+  margin: 6px 0 0;
+  color: var(--pa-muted);
+}
+
+.pa-legal-editor__toolbar-actions,
+.pa-legal-editor__section-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.pa-legal-editor button {
+  min-height: 38px;
+  padding: 8px 12px;
+  border: 1px solid var(--pa-border);
+  border-radius: 7px;
+  background: #fff;
+  color: var(--pa-text);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.pa-legal-editor button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.pa-legal-editor__toolbar-actions button[type="submit"],
+.pa-legal-editor__section-heading button {
+  border-color: var(--pa-indigo);
+  background: var(--pa-indigo);
+  color: #fff;
+}
+
+.pa-legal-editor__provisional,
+.pa-legal-editor__saved-date {
+  margin: 0;
+  color: var(--pa-muted);
+  font-size: 14px;
+}
+
+.pa-legal-editor__provisional {
+  padding: 11px 13px;
+  border-left: 4px solid #c08a26;
+  background: #fff8e9;
+  color: #624713;
+}
+
+.pa-legal-editor__success,
+.pa-legal-editor__error,
+.pa-legal-editor__read-only {
+  padding: 11px 13px;
+  border-radius: 6px;
+}
+
+.pa-legal-editor__success {
+  background: #eaf7f0;
+  color: #17613b;
+}
+
+.pa-legal-editor__error {
+  background: #fff0f0;
+  color: #922b2b;
+}
+
+.pa-legal-editor__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
+  align-items: start;
+  gap: 20px;
+}
+
+.pa-legal-editor__form {
+  display: grid;
+  min-width: 0;
+  gap: 14px;
+}
+
+.pa-legal-editor__form > label,
+.pa-legal-editor__section label {
+  display: grid;
+  gap: 6px;
+  color: var(--pa-text);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.pa-legal-editor input,
+.pa-legal-editor textarea {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 10px 11px;
+  border: 1px solid var(--pa-border);
+  border-radius: 6px;
+  background: #fff;
+  color: var(--pa-text);
+  font: inherit;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.pa-legal-editor textarea {
+  resize: vertical;
+}
+
+.pa-legal-editor__section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.pa-legal-editor__section-heading h3,
+.pa-legal-editor__preview h3 {
+  margin: 0;
+  color: var(--pa-navy);
+  font-size: 17px;
+}
+
+.pa-legal-editor__section {
+  display: grid;
+  min-width: 0;
+  gap: 12px;
+  margin: 0;
+  padding: 14px;
+  border: 1px solid var(--pa-border);
+  border-radius: 8px;
+  background: #fff;
+}
+
+.pa-legal-editor__section legend {
+  padding: 0 5px;
+  color: var(--pa-muted);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.pa-legal-editor__section-actions .is-danger {
+  color: #982f2f;
+}
+
+.pa-legal-editor__preview {
+  position: sticky;
+  top: 16px;
+  max-height: calc(100vh - 180px);
+  overflow: auto;
+  padding: 18px;
+  border: 1px solid var(--pa-border);
+  border-radius: 8px;
+  background: #fff;
+}
+
+.pa-legal-editor__preview h4 {
+  margin: 20px 0 6px;
+  color: var(--pa-navy);
+  font-size: 22px;
+}
+
+.pa-legal-editor__preview-date {
+  color: var(--pa-muted);
+  font-size: 13px;
+}
+
+.pa-legal-editor__preview p {
+  white-space: pre-wrap;
+  line-height: 1.65;
+}
+
+.pa-legal-editor__preview section {
+  padding-top: 7px;
+  border-top: 1px solid #edf0f4;
+}
+
+.pa-legal-editor__preview h5 {
+  margin: 12px 0 4px;
+  color: var(--pa-navy);
+  font-size: 15px;
+}
+
+.pa-legal-editor__read-only {
+  background: #eef4fb;
+}
+
+@media (max-width: 900px) {
+  .pa-legal-editor__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pa-legal-editor__preview {
+    position: static;
+    max-height: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .pa-legal-editor__toolbar {
+    flex-direction: column;
+  }
+
+  .pa-legal-editor__toolbar-actions {
+    width: 100%;
+  }
+
+  .pa-legal-editor__toolbar-actions button {
+    flex: 1;
+  }
+}

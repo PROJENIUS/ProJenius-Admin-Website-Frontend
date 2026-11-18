@@ -3,6 +3,7 @@ import {
   downloadAdminSubmissionFile,
   getAdminEnquiry,
   getAdminJobApplication,
+  retryAdminSubmissionEmails,
   updateAdminSubmissionStatus,
 } from "../../../services/adminContactService";
 import "./EnquiryDetails.css";
@@ -56,6 +57,8 @@ export default function EnquiryDetails({ admin, kind, record, onClose, onUpdated
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
+  const [retrying, setRetrying] = useState(false);
+  const [notice, setNotice] = useState("");
 
   useEffect(() => {
     let active = true;
@@ -89,6 +92,22 @@ export default function EnquiryDetails({ admin, kind, record, onClose, onUpdated
       setError(updateError.message);
     } finally {
       setSaving(false);
+    }
+  }
+
+  async function handleRetryEmails() {
+    setRetrying(true);
+    setError("");
+    setNotice("");
+    try {
+      const { item: updated, message } = await retryAdminSubmissionEmails(kind, item._id);
+      setItem((current) => ({ ...current, ...updated }));
+      onUpdated({ ...item, ...updated });
+      setNotice(message || "Emails sent.");
+    } catch (retryError) {
+      setError(retryError.message);
+    } finally {
+      setRetrying(false);
     }
   }
 
@@ -137,9 +156,15 @@ export default function EnquiryDetails({ admin, kind, record, onClose, onUpdated
                 </select>
               </label>
               <div className="pa-contact-detail__email-status">
-                <span>Customer email <strong>{getEmailStatus(item, "customerEmailStatus")}</strong></span>
-                <span>Administrator email <strong>{getEmailStatus(item, "adminEmailStatus")}</strong></span>
+                <span className={item.customerEmailStatus === "failed" ? "is-failed" : undefined}>Customer email <strong>{getEmailStatus(item, "customerEmailStatus")}</strong></span>
+                <span className={item.adminEmailStatus === "failed" ? "is-failed" : undefined}>Administrator email <strong>{getEmailStatus(item, "adminEmailStatus")}</strong></span>
+                {(item.customerEmailStatus === "failed" || item.adminEmailStatus === "failed" || item.emailStatus === "failed") && hasPermission(admin, `${permissionPrefix}:changeStatus`) && (
+                  <button type="button" className="pa-contact-detail__retry" onClick={() => void handleRetryEmails()} disabled={retrying}>
+                    {retrying ? "Sending…" : "Retry email"}
+                  </button>
+                )}
               </div>
+              {notice && <p className="pa-contact-detail__notice" role="status">{notice}</p>}
             </div>
 
             <dl className="pa-contact-detail__meta">

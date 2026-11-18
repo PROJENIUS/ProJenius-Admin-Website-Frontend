@@ -26,6 +26,7 @@ export const uploadPublishingImage = (form) => request("/admin/articles/image", 
 export const getNewsletterStats = () => request("/admin/newsletter/stats");
 export const listNewsletterSubscribers = (filters = {}) => request(`/admin/newsletter/subscribers${queryString({ limit: 20, ...filters })}`);
 export const removeNewsletterSubscriber = (id) => request(`/admin/newsletter/subscribers/${encodeURIComponent(id)}`, { method: "DELETE", csrf: true });
+export const retryNewsletterWelcomeEmail = (id) => request(`/admin/newsletter/subscribers/${encodeURIComponent(id)}/welcome-email/retry`, { method: "POST", body: {}, csrf: true });
 export const listNewsletterCampaigns = (filters = {}) => request(`/admin/newsletter/campaigns${queryString({ limit: 20, ...filters })}`);
 export const listNewsletterDeliveries = (id, filters = {}) => request(`/admin/newsletter/campaigns/${encodeURIComponent(id)}/deliveries${queryString({ limit: 20, ...filters })}`);
 export const retryNewsletterCampaign = (id) => request(`/admin/newsletter/campaigns/${encodeURIComponent(id)}/retry`, { method: "POST", body: {}, csrf: true });

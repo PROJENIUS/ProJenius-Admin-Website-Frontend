@@ -6,7 +6,7 @@
 
 // SECTION: API CONFIGURATION
 const configuredApiBaseUrl = import.meta.env.VITE_ADMIN_API_URL?.trim();
-const API_BASE_URL = (configuredApiBaseUrl || (import.meta.env.DEV ? "http://localhost:5000" : ""))
+const API_BASE_URL = (configuredApiBaseUrl || (import.meta.env.DEV ? "http://localhost:5000" : "https://projenius-official-website-backend.onrender.com"))
   .replace(/\/+$/, "");
 const AUTH_ENDPOINT = API_BASE_URL ? `${API_BASE_URL}/api/admin/auth` : "";
 

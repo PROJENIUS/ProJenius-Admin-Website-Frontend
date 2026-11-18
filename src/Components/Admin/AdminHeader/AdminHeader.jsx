@@ -2,6 +2,7 @@
    PROJENIUS ADMIN — HEADER
 ========================================================= */
 
+import { useEffect } from "react";
 import { getAdminRoleLabel } from "../../../utils/adminAccess";
 
 const pageTitles = {
@@ -14,7 +15,7 @@ const pageTitles = {
     description: "Manage incoming enquiries",
   },
   "/courses": {
-    title: "Courses",
+    title: "Course Management",
     description: "Manage courses and learning programmes",
   },
   "/registrations": {
@@ -22,8 +23,16 @@ const pageTitles = {
     description: "Manage student registrations",
   },
   "/publishing": {
-    title: "News & Insights",
+    title: "News & Insights Management",
     description: "Manage articles and publication status",
+  },
+  "/newsletter": {
+    title: "Newsletter Management",
+    description: "Manage subscribers and campaigns",
+  },
+  "/administrators": {
+    title: "Users & Activity",
+    description: "Admin and Staff accounts, sign-ins and changes",
   },
   "/content": {
     title: "Website Content",
@@ -37,6 +46,9 @@ const pageTitles = {
     title: "Settings",
     description: "Manage workspace preferences",
   },
+  "/legal/terms": { title: "Terms & Conditions", description: "Edit the public Terms document" },
+  "/legal/privacy-policy": { title: "Privacy Policy", description: "Edit the public Privacy Policy document" },
+  "/legal/course-terms": { title: "Course Terms", description: "Manage course purchase terms and checkout version" },
 };
 
 export default function AdminHeader({
@@ -46,6 +58,10 @@ export default function AdminHeader({
   onLogout,
 }) {
   const page = pageTitles[activePath] || pageTitles["/dashboard"];
+
+  useEffect(() => {
+    document.title = `${page.title} | ProJenius Admin`;
+  }, [page.title]);
 
   return (
     <header className="pa-admin-header">
@@ -68,7 +84,8 @@ export default function AdminHeader({
       <div className="pa-admin-header__right">
         <span className="pa-admin-header__status">
           <span className="pa-admin-header__status-dot" />
-          Admin workspace
+          <img className="pa-admin-header__brand-logo" src="/ProJenius_Logo.svg" alt="ProJenius Innovation Technology logo" />
+          <span className="pa-admin-header__brand-name">ProJenius Admin</span>
         </span>
 
         <div className="pa-admin-header__profile">

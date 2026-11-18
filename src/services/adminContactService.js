@@ -1,7 +1,7 @@
 import { getAdminCsrfToken } from "./adminAuth";
 
 const configuredApiBaseUrl = import.meta.env.VITE_ADMIN_API_URL?.trim();
-const API_BASE_URL = (configuredApiBaseUrl || (import.meta.env.DEV ? "http://localhost:5000" : ""))
+const API_BASE_URL = (configuredApiBaseUrl || (import.meta.env.DEV ? "http://localhost:5000" : "https://projenius-official-website-backend.onrender.com"))
   .replace(/\/+$/, "");
 const CONTACT_ENDPOINT = API_BASE_URL ? `${API_BASE_URL}/api/admin` : "";
 
@@ -90,4 +90,13 @@ export async function downloadAdminSubmissionFile(kind, id, fileKind) {
   }
 
   return response.blob();
+}
+
+export async function retryAdminSubmissionEmails(kind, id) {
+  const endpoint = kind === "career" ? "job-applications" : "enquiries";
+  const csrfToken = await getAdminCsrfToken();
+  return request(`/${endpoint}/${encodeURIComponent(id)}/emails/retry`, {
+    method: "POST",
+    headers: { "X-CSRF-Token": csrfToken },
+  });
 }

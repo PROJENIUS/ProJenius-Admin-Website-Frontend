@@ -15,9 +15,9 @@ const navigationGroups = [
     title: "MANAGEMENT",
     items: [
       { label: "Enquiries", icon: "✉", path: "/enquiries", permissions: ["enquiries:list", "careerApplications:list"] },
-      { label: "Courses", icon: "▤", path: "/courses", permissions: ["courses:list", "courses:enrollments:view", "courses:enrollments:details", "courses:enrollments:approve", "courses:enrollments:reject", "courses:notifications:view", "courses:notifications:retry", "courses:payments:view", "courses:analytics:view", "courses:refunds:view"] },
+      { label: "Courses", icon: "▤", path: "/courses", permissions: ["courses:list", "courses:enrollments:view", "courses:enrollments:details", "courses:notifications:view", "courses:notifications:retry", "courses:payments:view", "courses:analytics:view", "courses:refunds:view"] },
       { label: "News & Insights", icon: "▧", path: "/publishing", permissions: ["publishing:articles:list", "publishing:articles:view", "publishing:articles:create", "publishing:articles:edit", "publishing:articles:publish", "publishing:articles:schedule", "publishing:articles:archive", "publishing:articles:uploadImage", "publishing:campaigns:create"] },
-      { label: "Newsletter", icon: "✉", path: "/newsletter", permissions: ["newsletter:subscribers:view", "newsletter:campaigns:view", "newsletter:campaigns:retry", "newsletter:campaigns:cancel"] },
+      { label: "Newsletter", icon: "✉", path: "/newsletter", permissions: ["newsletter:subscribers:view", "newsletter:subscribers:retry", "newsletter:campaigns:view", "newsletter:campaigns:retry", "newsletter:campaigns:cancel"] },
     ],
   },
   {
@@ -30,7 +30,15 @@ const navigationGroups = [
   {
     title: "SYSTEM",
     items: [
-      { label: "Administrator Management", icon: "⚙", path: "/administrators", superAdminOnly: true },
+      { label: "Users & Activity", icon: "⚙", path: "/administrators", superAdminOnly: true },
+    ],
+  },
+  {
+    title: "LEGAL PAGES",
+    items: [
+      { label: "Terms & Conditions", icon: "§", path: "/legal/terms", permission: "legal:documents:view" },
+      { label: "Privacy Policy", icon: "◇", path: "/legal/privacy-policy", permission: "legal:documents:view" },
+      { label: "Course Terms", icon: "▤", path: "/legal/course-terms", permission: "legal:documents:view" },
     ],
   },
 ];
@@ -64,12 +72,12 @@ export default function AdminSidebar({
         aria-label="Admin navigation"
       >
         <div className="pa-sidebar__brand">
-          <div className="pa-sidebar__brand-mark">P</div>
+          <img className="pa-sidebar__brand-mark" src="/ProJenius_Logo.svg" alt="ProJenius Innovation Technology logo" />
 
           {!collapsed && (
             <div className="pa-sidebar__brand-copy">
-              <span className="pa-sidebar__brand-name">ProJenius</span>
-              <span className="pa-sidebar__brand-caption">ADMIN PORTAL</span>
+              <span className="pa-sidebar__brand-name">ProJenius Innovation Technology</span>
+              <span className="pa-sidebar__brand-caption">PROJENIUS ADMIN</span>
             </div>
           )}
 

@@ -1,7 +1,8 @@
 const LOCAL_HOSTS = new Set(["localhost", "127.0.0.1", "::1"]);
+export const DEFAULT_ADMIN_API_BASE_URL = "https://projenius-official-website-backend.onrender.com";
 
 export function normalizeAdminApiBase(configuredBase, development = false) {
-  const candidate = String(configuredBase || "").trim() || (development ? "http://localhost:5000" : "");
+  const candidate = String(configuredBase || "").trim() || (development ? "http://localhost:5000" : DEFAULT_ADMIN_API_BASE_URL);
   if (!candidate) return "";
   try {
     const url = new URL(candidate);

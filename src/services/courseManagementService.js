@@ -23,8 +23,6 @@ export const setCourseState = (id, action, scheduledAt) => request(`/courses/${e
 export const uploadCourseImage = (id, form) => request(`/courses/${encodeURIComponent(id)}/image`, { method: "POST", csrf: true, body: form });
 export const listEnrollments = (filters) => request(`/enrollments${query({ limit: 20, ...filters })}`);
 export const getEnrollmentDetails = (id) => request(`/enrollments/${encodeURIComponent(id)}`);
-export const decideEnrollment = (id, action, reason = "") => request(`/enrollments/${encodeURIComponent(id)}/decision`, { method: "PATCH", csrf: true, body: JSON.stringify({ action, reason }) });
-export const retryDecisionEmail = (id) => request(`/enrollments/${encodeURIComponent(id)}/decision-email/retry`, { method: "POST", csrf: true, body: JSON.stringify({}) });
 export const retryPaymentNotifications = (id) => request(`/enrollments/${encodeURIComponent(id)}/payment-notifications/retry`, { method: "POST", csrf: true, body: JSON.stringify({}) });
 export const listCourseNotifications = (filters) => request(`/notifications${query({ limit: 20, ...filters })}`);
 export const retryCourseNotification = (id) => request(`/notifications/${encodeURIComponent(id)}/retry`, { method: "POST", csrf: true, body: JSON.stringify({}) });
@@ -33,3 +31,11 @@ export const getCourseAnalytics = (filters) => request(`/analytics${query(filter
 export const listRefunds = (filters) => request(`/refunds${query({ limit: 20, ...filters })}`);
 export const downloadCourseReceipt = (id) => request(`/enrollments/${encodeURIComponent(id)}/receipt`);
 export const exportCourseReport = () => request("/reports/enrollments.csv");
+export const listCommonCourseFaqs = () => request("/common-faqs");
+export const saveCommonCourseFaq = (faq, id) => request(id ? `/common-faqs/${encodeURIComponent(id)}` : "/common-faqs", { method: id ? "PATCH" : "POST", csrf: true, body: JSON.stringify(faq) });
+export const deleteCommonCourseFaq = (id) => request(`/common-faqs/${encodeURIComponent(id)}`, { method: "DELETE", csrf: true });
+export const getCoursePolicy = () => request("/policy");
+export const saveCoursePolicyDraft = (policy) => request("/policy", { method: "PUT", csrf: true, body: JSON.stringify(policy) });
+export const publishCoursePolicy = (policy) => request("/policy/publish", { method: "POST", csrf: true, body: JSON.stringify(policy) });
+export const getAdminDashboard = () => request("/dashboard");
+export const clearDashboardNotifications = () => request("/dashboard/notifications/clear", { method: "POST", csrf: true, body: JSON.stringify({}) });

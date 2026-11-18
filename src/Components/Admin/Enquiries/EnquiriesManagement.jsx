@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import {
   listAdminEnquiries,
   listAdminJobApplications,
+  retryAdminSubmissionEmails,
 } from "../../../services/adminContactService";
 import EnquiryDetails from "../EnquiryDetails/EnquiryDetails";
 import { createRequestSequence } from "../../../utils/requestSequence";
@@ -69,6 +70,7 @@ export default function EnquiriesManagement({
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [selected, setSelected] = useState(null);
+  const [retryingId, setRetryingId] = useState("");
   const requestSequence = useRef(null);
   if (requestSequence.current === null) {
     requestSequence.current = createRequestSequence();
@@ -118,6 +120,20 @@ export default function EnquiriesManagement({
     setItems((current) => current.map((item) =>
       item._id === updated._id ? { ...item, ...updated } : item
     ));
+  }
+
+  async function retryEmails(item) {
+    if (retryingId) return;
+    setRetryingId(item._id);
+    setError("");
+    try {
+      const { item: updated } = await retryAdminSubmissionEmails(kind, item._id);
+      updateListItem(updated);
+    } catch (retryError) {
+      setError(retryError.message || "Email retry failed. Check the mail configuration and try again.");
+    } finally {
+      setRetryingId("");
+    }
   }
 
   const statuses = kind === "career" ? careerStatuses : enquiryStatuses;
@@ -180,8 +196,8 @@ export default function EnquiriesManagement({
                     <td>{item.referenceNumber}</td>
                     <td>{kind === "career" ? "Career application" : readableLabel(item.enquiryType)}</td>
                     <td>{formatDate(item.createdAt)}</td>
-                    <td><span className="pa-enquiries__status">{readableLabel(item.status)}</span></td>
-                    <td>{hasPermission(admin, kind === "career" ? "careerApplications:details" : "enquiries:details") && <button type="button" onClick={() => setSelected(item)}>View details</button>}</td>
+                    <td><span className="pa-enquiries__status">{readableLabel(item.status)}</span>{(item.emailStatus === "failed" || item.customerEmailStatus === "failed" || item.adminEmailStatus === "failed") && <span className="pa-enquiries__email-failed">Email failed</span>}</td>
+                    <td className="pa-enquiries__row-actions">{(item.emailStatus === "failed" || item.customerEmailStatus === "failed" || item.adminEmailStatus === "failed") && hasPermission(admin, kind === "career" ? "careerApplications:changeStatus" : "enquiries:changeStatus") && <button type="button" className="pa-enquiries__retry-email" disabled={Boolean(retryingId)} onClick={() => void retryEmails(item)}>{retryingId === item._id ? "Retrying…" : "Retry email"}</button>}{hasPermission(admin, kind === "career" ? "careerApplications:details" : "enquiries:details") && <button type="button" onClick={() => setSelected(item)}>View details</button>}</td>
                   </tr>)}
             </tbody>
           </table>

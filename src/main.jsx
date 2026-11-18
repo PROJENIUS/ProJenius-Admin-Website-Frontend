@@ -13,7 +13,8 @@ import "./Components/Login/LoginForm/LoginForm.css";
 import "./Components/Admin/AdminSidebar/AdminSidebar.css";
 import "./Components/Admin/AdminHeader/AdminHeader.css";
 import "./Components/Admin/AdminWorkspace/AdminWorkspace.css";
-import "./Pages/AccountAccess.css";
+import "./Components/Admin/LegalManagement/LegalManagement.css";
+import "./Components/AccountAccess/AccountAccess.css";
 
 /* =========================================================
    APPLICATION RENDER

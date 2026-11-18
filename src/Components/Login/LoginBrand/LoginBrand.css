@@ -32,13 +32,10 @@
 .pa-login-brand__logo {
   width: 58px;
   height: 58px;
-  display: grid;
-  place-items: center;
+  display: block;
   margin-bottom: 44px;
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  border-radius: 15px;
-  font-size: 30px;
-  font-weight: 800;
+  border-radius: 10px;
+  object-fit: contain;
 }
 
 .pa-login-brand__eyebrow {
@@ -74,6 +71,16 @@
   letter-spacing: 1.8px;
 }
 
+.pa-login-brand__footer small {
+  display: block;
+  max-width: 340px;
+  margin-top: 7px;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.5;
+}
+
 /* =========================================================
    RESPONSIVE BRAND PANEL
 ========================================================= */
@@ -91,7 +98,6 @@
     width: 46px;
     height: 46px;
     margin-bottom: 22px;
-    font-size: 24px;
   }
 
   .pa-login-brand__title {

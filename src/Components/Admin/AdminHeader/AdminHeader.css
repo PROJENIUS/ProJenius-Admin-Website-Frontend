@@ -123,6 +123,18 @@ input {
   background: #26966b;
 }
 
+.pa-admin-header__brand-logo {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+}
+
+.pa-admin-header__brand-name {
+  color: #304862;
+  font-size: 11px;
+  font-weight: 700;
+}
+
 .pa-admin-header__profile {
   display: flex;
   align-items: center;
@@ -288,9 +300,7 @@ input {
     padding: 20px;
   }
 
-  .pa-admin-header__status {
-    display: none;
-  }
+  .pa-admin-header__brand-name { display: none; }
 }
 
 @media (max-width: 768px) {
@@ -327,6 +337,9 @@ input {
   .pa-admin-header__right {
     gap: 10px;
   }
+
+  .pa-admin-header__status { gap: 5px; }
+  .pa-admin-header__brand-logo { width: 26px; height: 26px; }
 
   .pa-admin-header__profile {
     padding-left: 0;
