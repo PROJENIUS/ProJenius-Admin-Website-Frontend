@@ -44,6 +44,16 @@ export const PERMISSION_MODULES = Object.freeze([
     actions: [{ label: "Manage administrator accounts and invitations", available: false }],
   },
   {
+    label: "Career Guidance",
+    status: "available",
+    actions: [
+      { label: "View bookings", permission: "guidance:view" },
+      { label: "Mark done / cancel / retry emails", permission: "guidance:manage" },
+      { label: "Change fee and Meet link", permission: "guidance:settings" },
+      { label: "Refund bookings", permission: "guidance:refund" },
+    ],
+  },
+  {
     label: "Courses",
     status: "available",
     actions: [

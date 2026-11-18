@@ -16,6 +16,7 @@ const navigationGroups = [
     items: [
       { label: "Enquiries", icon: "✉", path: "/enquiries", permissions: ["enquiries:list", "careerApplications:list"] },
       { label: "Courses", icon: "▤", path: "/courses", permissions: ["courses:list", "courses:enrollments:view", "courses:enrollments:details", "courses:notifications:view", "courses:notifications:retry", "courses:payments:view", "courses:analytics:view", "courses:refunds:view"] },
+      { label: "Career Guidance", icon: "☎", path: "/career-guidance", permissions: ["guidance:view", "guidance:manage", "guidance:settings", "guidance:refund"] },
       { label: "News & Insights", icon: "▧", path: "/publishing", permissions: ["publishing:articles:list", "publishing:articles:view", "publishing:articles:create", "publishing:articles:edit", "publishing:articles:publish", "publishing:articles:schedule", "publishing:articles:archive", "publishing:articles:uploadImage", "publishing:campaigns:create"] },
       { label: "Newsletter", icon: "✉", path: "/newsletter", permissions: ["newsletter:subscribers:view", "newsletter:subscribers:retry", "newsletter:campaigns:view", "newsletter:campaigns:retry", "newsletter:campaigns:cancel"] },
     ],

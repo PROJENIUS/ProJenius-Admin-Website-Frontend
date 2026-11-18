@@ -24,15 +24,15 @@ test("administrator role labels and administrator-management access are role-spe
 
 test("permission selector exposes implemented publishing permissions and marks other modules unavailable", () => {
   const activeModules = PERMISSION_MODULES.filter((module) => module.status === "available");
-  assert.deepEqual(activeModules.map((module) => module.label), ["Dashboard", "Enquiries", "Career Applications", "Courses", "News & Insights", "Newsletter"]);
+  assert.deepEqual(activeModules.map((module) => module.label), ["Dashboard", "Enquiries", "Career Applications", "Career Guidance", "Courses", "News & Insights", "Newsletter"]);
   const activePermissions = activeModules.flatMap((module) => module.actions.map((action) => action.permission));
   for (const permission of DEFAULT_REGULAR_ADMIN_PERMISSIONS) assert.ok(activePermissions.includes(permission));
   const courseModule = PERMISSION_MODULES.find((module) => module.label === "Courses");
   assert.deepEqual(courseModule.actions.map((action) => action.permission), [
     "courses:list", "courses:view", "courses:create", "courses:edit", "courses:uploadImage",
     "courses:schedule", "courses:publish", "courses:unpublish", "courses:archive",
-    "courses:enrollments:view", "courses:enrollments:details", "courses:enrollments:approve",
-    "courses:enrollments:reject", "courses:notifications:retry", "courses:notifications:view", "courses:payments:view", "courses:analytics:view",
+    "courses:enrollments:view", "courses:enrollments:details",
+    "courses:notifications:retry", "courses:notifications:view", "courses:payments:view", "courses:analytics:view",
     "courses:reports:export", "courses:refunds:view",
   ]);
   assert.equal(DEFAULT_REGULAR_ADMIN_PERMISSIONS.some((permission) => permission.startsWith("courses:")), false);

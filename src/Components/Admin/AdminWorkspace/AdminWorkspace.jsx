@@ -5,6 +5,7 @@ import AdminHeader from "../AdminHeader/AdminHeader";
 import AdminPageContent from "../AdminPageContent/AdminPageContent";
 import AdminSidebar from "../AdminSidebar/AdminSidebar";
 import CourseManagement from "../CourseManagement/CourseManagement";
+import CareerGuidanceManagement from "../CareerGuidance/CareerGuidanceManagement";
 import Dashboard from "../Dashboard/Dashboard";
 import EnquiriesManagement from "../Enquiries/EnquiriesManagement";
 import LegalManagement from "../LegalManagement/LegalManagement";
@@ -21,6 +22,8 @@ const COURSE_PERMISSIONS = [
   "courses:analytics:view",
   "courses:refunds:view",
 ];
+
+const GUIDANCE_PERMISSIONS = ["guidance:view", "guidance:manage", "guidance:settings", "guidance:refund"];
 
 const PUBLISHING_PERMISSIONS = [
   "publishing:articles:list",
@@ -75,6 +78,10 @@ const pageInformation = {
     title: "Media Library",
     description: "This module is unavailable until its backend features are implemented.",
   },
+  "/career-guidance": {
+    title: "Career Guidance",
+    description: "1:1 guidance calls, fee and Meet link",
+  },
   "/administrators": {
     title: "Users & Activity",
     description: "Create Admin and Staff accounts and see every sign-in and change.",
@@ -128,6 +135,7 @@ export default function AdminWorkspace({ admin, onLogout }) {
     }
     if (path === "/dashboard" && !hasPermission(admin, "dashboard:view")) return;
     if (path === "/courses" && !hasAnyPermission(admin, COURSE_PERMISSIONS)) return;
+    if (path === "/career-guidance" && !hasAnyPermission(admin, GUIDANCE_PERMISSIONS)) return;
     if (path === "/publishing" && !hasAnyPermission(admin, PUBLISHING_PERMISSIONS)) return;
     if (path === "/newsletter" && !hasAnyPermission(admin, NEWSLETTER_PERMISSIONS)) return;
 
@@ -159,6 +167,10 @@ export default function AdminWorkspace({ admin, onLogout }) {
 
     if (activePath === "/administrators" && isSuperAdmin(admin)) {
       return <AdminManagement />;
+    }
+
+    if (activePath === "/career-guidance" && hasAnyPermission(admin, GUIDANCE_PERMISSIONS)) {
+      return <CareerGuidanceManagement admin={admin} />;
     }
 
     if (activePath === "/courses" && hasAnyPermission(admin, COURSE_PERMISSIONS)) {

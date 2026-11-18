@@ -30,6 +30,10 @@ const pageTitles = {
     title: "Newsletter Management",
     description: "Manage subscribers and campaigns",
   },
+  "/career-guidance": {
+    title: "Career Guidance",
+    description: "1:1 guidance calls, fee and Meet link",
+  },
   "/administrators": {
     title: "Users & Activity",
     description: "Admin and Staff accounts, sign-ins and changes",

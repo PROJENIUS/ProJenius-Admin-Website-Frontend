@@ -1,0 +1,46 @@
+.pcg { display: grid; gap: 18px; color: #172c46; }
+.pcg button { min-height: 36px; padding: 7px 12px; border: 1px solid #cbd8e5; border-radius: 8px; background: #fff; color: #173858; font: inherit; font-size: 13px; font-weight: 700; cursor: pointer; }
+.pcg button:disabled { opacity: 0.6; cursor: not-allowed; }
+.pcg button:focus-visible, .pcg input:focus-visible, .pcg select:focus-visible, .pcg textarea:focus-visible { outline: 2px solid #20c8f5; outline-offset: 2px; }
+.pcg .pcg-primary { background: #20c8f5; border-color: #20c8f5; color: #071426; }
+.pcg .pcg-danger { color: #b42318; border-color: #f1c4bf; }
+.pcg-head { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 22px 26px; border-radius: 16px; background: linear-gradient(115deg, #071426, #0d2c56 60%, #0b5c8f); color: #fff; }
+.pcg-head span { font-size: 11px; font-weight: 800; letter-spacing: .14em; color: #20c8f5; }
+.pcg-head h2 { margin: 6px 0; font-size: clamp(20px, 3vw, 28px); }
+.pcg-head p { margin: 0; color: rgba(255,255,255,.8); }
+.pcg-msg { margin: 0; padding: 10px 14px; border-radius: 10px; background: #e5f8f0; color: #0f7a54; font-weight: 600; }
+.pcg-msg.is-error { background: #fdecea; color: #b42318; }
+.pcg-tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; }
+.pcg-tiles article { display: grid; gap: 4px; padding: 14px 16px; border-radius: 14px; background: #fff; border: 1px solid #dce5ef; border-top: 4px solid var(--t, #20c8f5); }
+.pcg-tiles .is-blue { --t: #2a5fd6; } .pcg-tiles .is-green { --t: #0f8a5f; } .pcg-tiles .is-amber { --t: #d97a00; } .pcg-tiles .is-cyan { --t: #0478a8; }
+.pcg-tiles span { font-size: 13px; color: #5b6f86; font-weight: 700; }
+.pcg-tiles strong { font-size: 1.6rem; font-variant-numeric: tabular-nums; }
+.pcg-card { padding: 18px 20px; border-radius: 14px; background: #fff; border: 1px solid #dce5ef; }
+.pcg-settings { display: grid; grid-template-columns: 160px minmax(0, 1fr) 160px; gap: 12px 16px; align-items: end; }
+.pcg-settings h3 { grid-column: 1 / -1; margin: 0; }
+.pcg-settings label, .pcg-filters label, .pcg-dialog label { display: grid; gap: 6px; font-size: 13px; font-weight: 700; color: #34506f; }
+.pcg input, .pcg select, .pcg textarea { min-height: 40px; padding: 8px 12px; border: 1px solid #cbd8e5; border-radius: 8px; font: inherit; font-size: 14px; color: #172c46; background: #fff; width: 100%; box-sizing: border-box; }
+.pcg .pcg-check { display: flex; align-items: center; gap: 8px; grid-column: 1 / -1; }
+.pcg .pcg-check input { width: 18px; min-height: 18px; accent-color: #0478a8; }
+.pcg-hint { grid-column: 1 / -1; margin: 0; font-size: 12.5px; color: #5b6f86; }
+.pcg-settings > button { justify-self: start; }
+.pcg-filters { display: flex; flex-wrap: wrap; gap: 12px; align-items: end; }
+.pcg-filters label { min-width: 200px; flex: 1; }
+.pcg-chips { display: flex; gap: 6px; }
+.pcg-chips button[aria-pressed="true"] { background: #071426; border-color: #071426; color: #fff; }
+.pcg-table { overflow-x: auto; padding: 0; }
+.pcg table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.pcg th { padding: 12px; text-align: left; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: #5b6f86; border-bottom: 1px solid #e3e9f1; }
+.pcg td { padding: 12px; border-bottom: 1px solid #eef2f7; vertical-align: top; }
+.pcg td span { display: block; font-size: 12.5px; color: #5b6f86; }
+.pcg td span.pcg-bad { color: #b42318; font-weight: 700; }
+.pcg-actions { display: flex; flex-wrap: wrap; gap: 6px; }
+.pcg-pill { display: inline-block; padding: 3px 10px; border-radius: 999px; font-style: normal; font-size: 12px; font-weight: 800; background: #eef2f7; color: #34506f; }
+.pcg-pill.is-confirmed { background: #e6f4fd; color: #0478a8; }
+.pcg-pill.is-completed { background: #e5f8f0; color: #0f7a54; }
+.pcg-pill.is-refunded, .pcg-pill.is-cancelled, .pcg-pill.is-payment_failed { background: #fdecea; color: #b42318; }
+.pcg-backdrop { position: fixed; inset: 0; z-index: 50; display: grid; place-items: center; padding: 16px; background: rgba(7, 20, 38, .55); }
+.pcg-dialog { display: grid; gap: 12px; width: min(440px, 100%); padding: 22px; border-radius: 16px; background: #fff; box-shadow: 0 30px 70px -20px rgba(0,0,0,.5); }
+.pcg-dialog h3 { margin: 0; }
+.pcg-dialog p { margin: 0; color: #5b6f86; font-size: 13.5px; }
+@media (max-width: 820px) { .pcg-settings { grid-template-columns: minmax(0, 1fr); } .pcg-head { flex-direction: column; align-items: flex-start; } }

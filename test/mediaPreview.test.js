@@ -4,13 +4,14 @@ import test from "node:test";
 
 test("course editor previews selected and saved covers through the authenticated image route", async () => {
   const component = await readFile(new URL("../src/Components/Admin/CourseManagement/CourseManagement.jsx", import.meta.url), "utf8");
+  const editor = await readFile(new URL("../src/Components/Admin/CourseManagement/CourseEditorSections.jsx", import.meta.url), "utf8");
   const service = await readFile(new URL("../src/services/courseManagementService.js", import.meta.url), "utf8");
   assert.match(component, /URL\.createObjectURL\(file\)/);
   assert.match(component, /URL\.revokeObjectURL\(selectedPreviewUrlRef\.current\)/);
-  assert.match(component, /Selected image preview/);
+  assert.match(editor, /Selected image preview/);
   assert.match(component, /courseAdminImageUrl\(editing\)/);
-  assert.match(component, /crossOrigin="use-credentials"/);
-  assert.match(component, /savedCover\?\.filename/);
+  assert.match(editor, /crossOrigin="use-credentials"/);
+  assert.match(editor, /savedCover\?\.filename/);
   assert.match(service, /\/api\/courses\/admin\/courses\/\$\{encodeURIComponent\(courseId\)\}\/image/);
 });
 
