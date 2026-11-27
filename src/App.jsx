@@ -45,8 +45,12 @@ function AdminApplication() {
     }
   }, []);
 
+  const [slowStart, setSlowStart] = useState(false);
+
   useEffect(() => {
     Promise.resolve().then(checkSession);
+    const timer = window.setTimeout(() => setSlowStart(true), 2500);
+    return () => window.clearTimeout(timer);
   }, [checkSession]);
 
   // SECTION: AUTHENTICATE ADMIN
@@ -80,7 +84,11 @@ function AdminApplication() {
   }
 
   // SECTION: SESSION LOADING STATE
-  if (isCheckingSession) {
+  // The free backend host sleeps after 15 quiet minutes and takes up to two
+  // minutes to wake. A short check shows a brief message; a slow one shows
+  // the sign-in form straight away with a note, and switches to the
+  // dashboard by itself if the session turns out to be valid.
+  if (isCheckingSession && !slowStart) {
     return (
       <main className="pa-auth-loading" role="status">
         <p>Verifying your admin session...</p>
@@ -90,7 +98,16 @@ function AdminApplication() {
 
   // SECTION: APPLICATION ACCESS
   if (!admin) {
-    return <Login onLogin={handleLogin} />;
+    return (
+      <>
+        {isCheckingSession && (
+          <p className="pa-auth-waking" role="status">
+            Waking up the server. After a quiet period this can take up to a minute; you can enter your details meanwhile.
+          </p>
+        )}
+        <Login onLogin={handleLogin} />
+      </>
+    );
   }
 
   return <AdminPages admin={admin} onLogout={handleLogout} />;

@@ -113,3 +113,6 @@
     margin-top: 30px;
   }
 }
+
+/* Shown above the sign-in form while the free backend host wakes up. */
+.pa-auth-waking { position: fixed; z-index: 50; top: 16px; left: 50%; transform: translateX(-50%); box-sizing: border-box; width: min(560px, calc(100% - 32px)); margin: 0; padding: 10px 16px; border: 1px solid #f3d39b; border-radius: 12px; background: #fff7e6; color: #6b3a00; font: 600 0.9rem/1.45 system-ui, sans-serif; text-align: center; box-shadow: 0 12px 30px -18px rgba(0, 0, 0, 0.5); }
