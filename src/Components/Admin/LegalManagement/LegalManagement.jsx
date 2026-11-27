@@ -7,7 +7,8 @@ import {
 const DOCUMENT_LABELS = {
   terms: "Terms & Conditions",
   "privacy-policy": "Privacy Policy",
-  "course-terms": "Course Terms",
+  "cookie-policy": "Cookie Policy",
+  "course-terms": "Live Training Refund Policy",
 };
 
 function editableShape(item) {
@@ -28,10 +29,11 @@ function formatDate(value) {
   const date = new Date(value);
   if (Number.isNaN(date.getTime())) return "Date unavailable";
 
-  return new Intl.DateTimeFormat(undefined, {
+  return `${new Intl.DateTimeFormat("en-IN", {
     dateStyle: "medium",
-    timeZone: "UTC",
-  }).format(date);
+    timeStyle: "short",
+    timeZone: "Asia/Kolkata",
+  }).format(date)} IST`;
 }
 
 function getStatusMessage({ isDraft, isProvisional, lastUpdated }) {

@@ -50,9 +50,12 @@ const pageTitles = {
     title: "Settings",
     description: "Manage workspace preferences",
   },
+  "/careers": { title: "Job Openings", description: "Roles on the website Join Our Team page" },
+  "/page-heroes": { title: "Page Heroes", description: "The first section of every website page, Home included" },
   "/legal/terms": { title: "Terms & Conditions", description: "Edit the public Terms document" },
   "/legal/privacy-policy": { title: "Privacy Policy", description: "Edit the public Privacy Policy document" },
-  "/legal/course-terms": { title: "Course Terms", description: "Manage course purchase terms and checkout version" },
+  "/legal/cookie-policy": { title: "Cookie Policy", description: "Edit the public Cookie Policy document" },
+  "/legal/course-terms": { title: "Live Training Refund Policy", description: "Course purchase terms and refunds; saving publishes a new checkout version" },
 };
 
 export default function AdminHeader({

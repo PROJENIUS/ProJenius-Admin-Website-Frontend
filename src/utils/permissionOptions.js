@@ -81,6 +81,15 @@ export const PERMISSION_MODULES = Object.freeze([
     status: "unavailable",
     actions: unavailableActions(["List", "View details", "Create", "Edit", "Change status", "Delete"]),
   },
+  { label: "Home Hero", status: "available", actions: [
+    { label: "View Home Hero slides", permission: "home:hero:view" }, { label: "Edit and publish Home Hero slides", permission: "home:hero:edit" },
+  ] },
+  { label: "Job Openings", status: "available", actions: [
+    { label: "View job openings", permission: "careers:openings:view" }, { label: "Create, edit, publish and close job openings", permission: "careers:openings:edit" },
+  ] },
+  { label: "Page Heroes", status: "available", actions: [
+    { label: "View page heroes", permission: "pages:heroes:view" }, { label: "Edit and publish page heroes", permission: "pages:heroes:edit" },
+  ] },
   { label: "News & Insights", status: "available", actions: [
     { label: "List articles", permission: "publishing:articles:list" }, { label: "View article details and previews", permission: "publishing:articles:view" }, { label: "Create articles", permission: "publishing:articles:create" }, { label: "Edit articles", permission: "publishing:articles:edit" }, { label: "Publish and schedule", permission: "publishing:articles:publish" }, { label: "Upload images", permission: "publishing:articles:uploadImage" }, { label: "Create announcement campaigns", permission: "publishing:campaigns:create" },
   ] },

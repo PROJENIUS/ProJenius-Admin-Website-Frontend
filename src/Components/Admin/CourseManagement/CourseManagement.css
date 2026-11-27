@@ -165,3 +165,8 @@
 .pa-course-editor__mode small { color: #5b6f86; }
 .pa-course-editor__mode .pa-course-editor__hint, .pa-course-editor__mode .pa-course-editor__field-error { grid-column: 1 / -1; }
 @media (max-width: 640px) { .pa-course-editor__mode { grid-template-columns: minmax(0, 1fr); } }
+
+/* Unsaved draft banner */
+.pa-course__draft { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 0 0 14px; padding: 10px 14px; border-radius: 10px; background: #fff4e0; border: 1px solid #f3d39b; color: #6b3a00; font-weight: 600; }
+.pa-course__draft span { flex: 1; min-width: 220px; }
+.pa-course__draft button { min-height: 34px; padding: 0 12px; border: 1px solid #e3b866; border-radius: 8px; background: #fff; color: #6b3a00; font: inherit; font-weight: 800; cursor: pointer; }

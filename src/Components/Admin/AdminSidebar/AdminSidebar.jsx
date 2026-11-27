@@ -16,6 +16,7 @@ const navigationGroups = [
     items: [
       { label: "Enquiries", icon: "✉", path: "/enquiries", permissions: ["enquiries:list", "careerApplications:list"] },
       { label: "Courses", icon: "▤", path: "/courses", permissions: ["courses:list", "courses:enrollments:view", "courses:enrollments:details", "courses:notifications:view", "courses:notifications:retry", "courses:payments:view", "courses:analytics:view", "courses:refunds:view"] },
+      { label: "Job Openings", icon: "◆", path: "/careers", permissions: ["careers:openings:view", "careers:openings:edit"] },
       { label: "Career Guidance", icon: "☎", path: "/career-guidance", permissions: ["guidance:view", "guidance:manage", "guidance:settings", "guidance:refund"] },
       { label: "News & Insights", icon: "▧", path: "/publishing", permissions: ["publishing:articles:list", "publishing:articles:view", "publishing:articles:create", "publishing:articles:edit", "publishing:articles:publish", "publishing:articles:schedule", "publishing:articles:archive", "publishing:articles:uploadImage", "publishing:campaigns:create"] },
       { label: "Newsletter", icon: "✉", path: "/newsletter", permissions: ["newsletter:subscribers:view", "newsletter:subscribers:retry", "newsletter:campaigns:view", "newsletter:campaigns:retry", "newsletter:campaigns:cancel"] },
@@ -24,6 +25,7 @@ const navigationGroups = [
   {
     title: "WEBSITE",
     items: [
+      { label: "Page Heroes", icon: "▭", path: "/page-heroes", permissions: ["home:hero:view", "home:hero:edit", "pages:heroes:view", "pages:heroes:edit"] },
       { label: "Website Content · unavailable", icon: "◫", path: "/content" },
       { label: "Media Library · unavailable", icon: "▧", path: "/media" },
     ],
@@ -39,7 +41,8 @@ const navigationGroups = [
     items: [
       { label: "Terms & Conditions", icon: "§", path: "/legal/terms", permission: "legal:documents:view" },
       { label: "Privacy Policy", icon: "◇", path: "/legal/privacy-policy", permission: "legal:documents:view" },
-      { label: "Course Terms", icon: "▤", path: "/legal/course-terms", permission: "legal:documents:view" },
+      { label: "Cookie Policy", icon: "◌", path: "/legal/cookie-policy", permission: "legal:documents:view" },
+      { label: "Live Training Refund Policy", icon: "▤", path: "/legal/course-terms", permission: "legal:documents:view" },
     ],
   },
 ];

@@ -8,6 +8,8 @@ import CourseManagement from "../CourseManagement/CourseManagement";
 import CareerGuidanceManagement from "../CareerGuidance/CareerGuidanceManagement";
 import Dashboard from "../Dashboard/Dashboard";
 import EnquiriesManagement from "../Enquiries/EnquiriesManagement";
+import PageHeroesManagement from "../PageHeroes/PageHeroesManagement";
+import CareersManagement from "../Careers/CareersManagement";
 import LegalManagement from "../LegalManagement/LegalManagement";
 import NewsletterManagement from "../Publishing/NewsletterManagement";
 import PublishingManagement from "../Publishing/PublishingManagement";
@@ -36,6 +38,12 @@ const PUBLISHING_PERMISSIONS = [
   "publishing:articles:uploadImage",
   "publishing:campaigns:create",
 ];
+
+const HOME_HERO_PERMISSIONS = ["home:hero:view", "home:hero:edit"];
+const PAGE_HERO_PERMISSIONS = ["pages:heroes:view", "pages:heroes:edit"];
+const CAREERS_PERMISSIONS = ["careers:openings:view", "careers:openings:edit"];
+/* Page Heroes also holds the Home Hero editor (Home is its first page). */
+const ALL_HERO_PERMISSIONS = [...HOME_HERO_PERMISSIONS, ...PAGE_HERO_PERMISSIONS];
 
 const NEWSLETTER_PERMISSIONS = [
   "newsletter:subscribers:view",
@@ -66,6 +74,14 @@ const pageInformation = {
     title: "Newsletter",
     description: "Review subscribers, campaigns and delivery outcomes.",
   },
+  "/careers": {
+    title: "Job Openings",
+    description: "Roles published on the website's Join Our Team page.",
+  },
+  "/page-heroes": {
+    title: "Page Heroes",
+    description: "Edit the first section of every website page, Home included.",
+  },
   "/registrations": {
     title: "Registration Management",
     description: "This module is unavailable until its backend features are implemented.",
@@ -94,6 +110,10 @@ const pageInformation = {
     title: "Privacy Policy",
     description: "Edit the public Privacy Policy document.",
   },
+  "/legal/cookie-policy": {
+    title: "Cookie Policy",
+    description: "Edit the public Cookie Policy document.",
+  },
   "/legal/course-terms": {
     title: "Course Terms",
     description: "Edit the terms and version used by course checkout.",
@@ -112,6 +132,10 @@ export default function AdminWorkspace({ admin, onLogout }) {
   const registerLegalDirty = useCallback((dirty) => {
     legalDirtyRef.current = dirty;
   }, []);
+  const pageHeroDirtyRef = useRef(false);
+  const registerPageHeroDirty = useCallback((dirty) => {
+    pageHeroDirtyRef.current = dirty;
+  }, []);
   const currentPage = pageInformation[activePath] || pageInformation["/dashboard"];
 
   function handleNavigation(path) {
@@ -123,8 +147,19 @@ export default function AdminWorkspace({ admin, onLogout }) {
     ) {
       return;
     }
+    if (
+      activePath === "/page-heroes"
+      && path !== "/page-heroes"
+      && pageHeroDirtyRef.current
+      && !window.confirm("You have unsaved page hero changes. Leave and discard them?")
+    ) {
+      return;
+    }
+    if (path !== "/page-heroes") pageHeroDirtyRef.current = false;
 
     if (path.startsWith("/legal/") && !hasPermission(admin, "legal:documents:view")) return;
+    if (path === "/page-heroes" && !hasAnyPermission(admin, ALL_HERO_PERMISSIONS)) return;
+    if (path === "/careers" && !hasAnyPermission(admin, CAREERS_PERMISSIONS)) return;
     if (path === "/administrators" && !isSuperAdmin(admin)) return;
     if (
       path === "/enquiries"
@@ -189,6 +224,22 @@ export default function AdminWorkspace({ admin, onLogout }) {
       && hasAnyPermission(admin, NEWSLETTER_PERMISSIONS)
     ) {
       return <NewsletterManagement admin={admin} />;
+    }
+
+    if (activePath === "/careers" && hasAnyPermission(admin, CAREERS_PERMISSIONS)) {
+      return <CareersManagement canEdit={hasPermission(admin, "careers:openings:edit")} />;
+    }
+
+    if (activePath === "/page-heroes" && hasAnyPermission(admin, ALL_HERO_PERMISSIONS)) {
+      return (
+        <PageHeroesManagement
+          canViewHome={hasAnyPermission(admin, HOME_HERO_PERMISSIONS)}
+          canEditHome={hasPermission(admin, "home:hero:edit")}
+          canViewPages={hasAnyPermission(admin, PAGE_HERO_PERMISSIONS)}
+          canEdit={hasPermission(admin, "pages:heroes:edit")}
+          onDirtyChange={registerPageHeroDirty}
+        />
+      );
     }
 
     if (

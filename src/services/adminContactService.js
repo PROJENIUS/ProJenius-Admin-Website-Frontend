@@ -1,8 +1,8 @@
 import { getAdminCsrfToken } from "./adminAuth";
+import { normalizeAdminApiBase } from "../utils/apiUrl.js";
 
 const configuredApiBaseUrl = import.meta.env.VITE_ADMIN_API_URL?.trim();
-const API_BASE_URL = (configuredApiBaseUrl || (import.meta.env.DEV ? "http://localhost:5000" : "https://projenius-official-website-backend.onrender.com"))
-  .replace(/\/+$/, "");
+const API_BASE_URL = normalizeAdminApiBase(configuredApiBaseUrl, import.meta.env.DEV);
 const CONTACT_ENDPOINT = API_BASE_URL ? `${API_BASE_URL}/api/admin` : "";
 
 async function request(path, options = {}) {

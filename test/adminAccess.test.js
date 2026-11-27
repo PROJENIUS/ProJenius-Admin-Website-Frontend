@@ -24,7 +24,7 @@ test("administrator role labels and administrator-management access are role-spe
 
 test("permission selector exposes implemented publishing permissions and marks other modules unavailable", () => {
   const activeModules = PERMISSION_MODULES.filter((module) => module.status === "available");
-  assert.deepEqual(activeModules.map((module) => module.label), ["Dashboard", "Enquiries", "Career Applications", "Career Guidance", "Courses", "News & Insights", "Newsletter"]);
+  assert.deepEqual(activeModules.map((module) => module.label), ["Dashboard", "Enquiries", "Career Applications", "Career Guidance", "Courses", "Home Hero", "Job Openings", "Page Heroes", "News & Insights", "Newsletter"]);
   const activePermissions = activeModules.flatMap((module) => module.actions.map((action) => action.permission));
   for (const permission of DEFAULT_REGULAR_ADMIN_PERMISSIONS) assert.ok(activePermissions.includes(permission));
   const courseModule = PERMISSION_MODULES.find((module) => module.label === "Courses");

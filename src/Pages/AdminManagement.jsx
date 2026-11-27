@@ -65,6 +65,7 @@ function describe(item) {
       detail: { unknown_email: "No account with this email", wrong_password: "Wrong password", account_inactive: "Account is deactivated" }[m.reason] || "",
     };
     case "logout": return { tone: "", text: "Signed out" };
+    case "security.alert_sent": return { tone: "warn", text: `Security alert emailed: ${m.attempts || 5} failed sign-ins for ${m.email || "an account"}`, detail: m.status === "sent" ? "Email sent" : "Email not sent (check Gmail settings)" };
     case "account.created": return { tone: "ok", text: `Created ${ROLE_LABEL[m.role] || "user"} account for ${m.email || target}` };
     case "account.role_changed": return { tone: "", text: `Changed role of ${target}`, detail: `${ROLE_LABEL[m.previous] || m.previous} → ${ROLE_LABEL[m.current] || m.current}` };
     case "account.deactivated": return { tone: "warn", text: `Deactivated ${target}` };

@@ -20,6 +20,16 @@ export default function CourseManagement({ admin, onNavigate }) {
   const [form, setForm] = useState(blank), [editing, setEditing] = useState(null), [image, setImage] = useState(null), [savedCover, setSavedCover] = useState(null), [selectedPreviewUrl, setSelectedPreviewUrl] = useState(""), [loading, setLoading] = useState(true), [error, setError] = useState(""), [notice, setNotice] = useState(""), [reloadKey, setReloadKey] = useState(0), [isDirty, setIsDirty] = useState(false);
   const [editorSection, setEditorSection] = useState("hero"), [publishIssues, setPublishIssues] = useState([]), [saving, setSaving] = useState(false);
   const selectedPreviewUrlRef = useRef("");
+  // Draft autosave: unsaved edits survive a session timeout or a closed tab.
+  const DRAFT_KEY = "pa-course-draft";
+  const [savedDraft, setSavedDraft] = useState(() => { try { return JSON.parse(localStorage.getItem(DRAFT_KEY) || "null"); } catch { return null; } });
+  useEffect(() => {
+    if (!isDirty) return undefined;
+    const timer = setTimeout(() => { try { localStorage.setItem(DRAFT_KEY, JSON.stringify({ form, editing, at: new Date().toISOString() })); } catch { /* storage full or blocked */ } }, 600);
+    return () => clearTimeout(timer);
+  }, [form, editing, isDirty]);
+  const clearDraft = () => { try { localStorage.removeItem(DRAFT_KEY); } catch { /* ignore */ } setSavedDraft(null); };
+  const restoreDraft = () => { if (!savedDraft) return; setEditing(savedDraft.editing || null); setForm({ ...blank, ...savedDraft.form }); setIsDirty(true); setSavedDraft(null); setNotice("Unsaved draft restored. Save it to keep it."); };
   const editorWorkspaceRef = useRef(null);
   const can = (permission) => hasPermission(admin, permission);
   const canManageSchedule = can("courses:schedule");
@@ -96,6 +106,7 @@ export default function CourseManagement({ admin, onNavigate }) {
       setSavedCover(saved.item.coverImage || savedCover);
       if (image) { const data = new FormData(); data.append("image", image); data.append("alt", form.imageAlt || ""); await uploadCourseImage(saved.item._id, data); }
       if (publish) await setCourseState(saved.item._id, "publish");
+      clearDraft();
       setNotice(publish ? "Course published." : editing ? "Course changes saved." : "Course draft created."); setForm(blank); setIsDirty(false); setEditing(null); selectImage(null); setSavedCover(null); setPublishIssues([]); setEditorSection("hero"); setLoading(true); setReloadKey((value) => value + 1);
     } catch (e) { setError(e.message); }
     finally { setSaving(false); }
@@ -141,6 +152,13 @@ export default function CourseManagement({ admin, onNavigate }) {
     {activeTab === "courses" && <div className="pa-course__workspace">
       {(can("courses:create") || (editing && can("courses:edit"))) && <section ref={editorWorkspaceRef} className="pa-course__editor-workspace" aria-labelledby="pa-course-editor-heading">
         <header className="pa-course__editor-heading"><div><span className="pa-course__status-pill">{editing ? readable(editingCourse?.status || "saved course") : "New course · not saved"}</span><h2 id="pa-course-editor-heading">{editing ? "Edit Course: " + (form.title || editingCourse?.title || "Untitled") : "Create New Course"}</h2><p>{hasUnsavedChanges ? "Unsaved changes" : "No unsaved changes"} · Drafts can be incomplete. Publishing requires all required sections.</p></div></header>
+        {savedDraft && !isDirty && (
+          <div className="pa-course__draft" role="status">
+            <span>You have an unsaved course draft{savedDraft.form?.title ? ` (“${savedDraft.form.title}”)` : ""} from {new Date(savedDraft.at).toLocaleString()}.</span>
+            <button type="button" onClick={restoreDraft}>Restore draft</button>
+            <button type="button" onClick={clearDraft}>Discard</button>
+          </div>
+        )}
         <form className="pa-course__form" onSubmit={submit} noValidate>
           {/* Ten-section course form stays the single source of truth for save and preview. */}
           <CourseEditorSections form={form} setForm={updateForm} setField={setField} activeSection={editorSection} setActiveSection={setEditorSection} sections={sectionStatuses} issues={visiblePublishIssues} editId={editing} canManageSchedule={canManageSchedule} canUploadImage={can("courses:uploadImage")} canViewInternalCost={can("courses:analytics:view")} courses={previewCourses} updateEntry={updateEntry} moveEntry={moveEntry} updateLesson={updateLesson} moveLesson={moveLesson} updateCurriculumChild={updateCurriculumChild} moveCurriculumChild={moveCurriculumChild} selectImage={selectImage} selectedPreviewUrl={selectedPreviewUrl} savedCover={savedCover} coverUrl={editing ? courseAdminImageUrl(editing) : ""} setError={setError} />
